@@ -21,7 +21,7 @@ Python version Python 3.5.3
 ```
 $ cd /usr/src/
 $ sudo git clone https://github.com/gjwmotor/lygion_devs_py.git
-$ sudo chown -R pi lygion_devs
+$ sudo chown -R pi lygion_devs_py
 $ cd lygion_devs_py/lynode
 $ python3 ttln_ping.py
 Succeeded to open the port
