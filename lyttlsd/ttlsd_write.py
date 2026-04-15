@@ -46,7 +46,7 @@ while 1:
     elif scs_error != 0:
         print("%s" % packetHandler.getRxPacketError(scs_error))
     
-    time.sleep(((3200-0)/(60*50) + (60*50)/(1000*100) + 0.05))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 0.05
+    time.sleep(((3200-0)/(600*50) + (600*50)/(1000*1000*4) + 1))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 1
     
     # TTLSD (ID1) runs at a maximum speed of V=600 * 0.9375=562.5rpm and an acceleration of A=250*4 until P0=0 position
     # Goal Current=150
@@ -56,7 +56,7 @@ while 1:
     elif scs_error != 0:
         print("%s" % packetHandler.getRxPacketError(scs_error))
     
-    time.sleep(((3200-0)/(60*50) + (60*50)/(1000*100) + 0.05))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 0.05
+    time.sleep(((3200-0)/(600*50) + (600*50)/(1000*1000*4) + 1))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 1
 
 # Close port
 portHandler.closePort()

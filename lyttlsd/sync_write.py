@@ -54,7 +54,7 @@ while 1:
     # Clear syncwrite parameter storage
     packetHandler.groupSyncWrite.clearParam()
 
-    time.sleep(((3200-0)/(60*50) + (60*50)/(1000*100) + 0.05))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 0.05
+    time.sleep(((3200-0)/(600*50) + (600*50)/(1000*1000*4) + 1))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 1
 
     for scs_id in range(1, 11):
         # Add TTLSD#1~10 goal position\moving speed\moving accc value to the Syncwrite parameter storage
@@ -72,7 +72,7 @@ while 1:
     # Clear syncwrite parameter storage
     packetHandler.groupSyncWrite.clearParam()
     
-    time.sleep(((3200-0)/(60*50) + (60*50)/(1000*100) + 0.05))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 0.05
+    time.sleep(((3200-0)/(600*50) + (600*50)/(1000*1000*4) + 1))#[(P1-P0)/(V*50)] + [(V*50)/(A*100)] + 1
 
 # Close port
 portHandler.closePort()
