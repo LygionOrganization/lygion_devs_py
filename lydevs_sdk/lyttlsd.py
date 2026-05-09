@@ -27,6 +27,7 @@ LY_TTLSD_MIN_ANGLE_LIMIT_L = 9
 LY_TTLSD_MIN_ANGLE_LIMIT_H = 10
 LY_TTLSD_MAX_ANGLE_LIMIT_L = 11
 LY_TTLSD_MAX_ANGLE_LIMIT_H = 12
+LY_TTLSD_RESOLUTION = 30
 LY_TTLSD_MODE = 33
 #-------SRAM(读写)--------
 LY_TTLSD_TORQUE_ENABLE = 40
@@ -91,6 +92,9 @@ class TTLSDClass(protocol_packet_handler):
     def RegAction(self):
         return self.action(BROADCAST_ID)
 
+    def ToruqeCtl(self, scs_id, torque):
+        return self.write2ByteTxRx(scs_id, LY_TTLSD_GOAL_CURRENT_L, torque)
+    
     def WheelMode(self, scs_id):
         return self.write1ByteTxRx(scs_id, LY_TTLSD_MODE, 1)
 
@@ -99,6 +103,21 @@ class TTLSDClass(protocol_packet_handler):
         txpacket = [acc, 0, 0, self.scs_lobyte(torque), self.scs_hibyte(torque), self.scs_lobyte(speed), self.scs_hibyte(speed)]
         return self.writeTxRx(scs_id, LY_TTLSD_ACC, len(txpacket), txpacket)
 
+    def TorqueEn(self, scs_id, en):
+        return self.write1ByteTxRx(scs_id, LY_TTLSD_TORQUE_ENABLE, en)
+
+    def SetMode(self, scs_id, mode):
+        return self.write1ByteTxRx(scs_id, LY_TTLSD_MODE, mode)
+
+    def GetMode(self, scs_id):
+        return self.read1ByteTxRx(scs_id, LY_TTLSD_MODE)
+
+    def SetResolution(self, scs_id, Resolution):
+        return self.write1ByteTxRx(scs_id, LY_TTLSD_RESOLUTION, Resolution)
+
+    def SetID(self, scs_oldid, scs_newid):
+        return self.write1ByteTxRx(scs_oldid, LY_TTLSD_ID, scs_newid)
+    
     def LockEprom(self, scs_id):
         return self.write1ByteTxRx(scs_id, LY_TTLSD_LOCK, 1)
 

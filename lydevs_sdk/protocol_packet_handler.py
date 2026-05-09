@@ -563,3 +563,19 @@ class protocol_packet_handler(object):
         rxpacket, result, error = self.txRxPacket(txpacket)
 
         return result, error
+
+    def Recover(self, scs_id):
+        error = 0
+
+        txpacket = [0] * 6
+
+        if scs_id > BROADCAST_ID:
+            return COMM_NOT_AVAILABLE, error
+
+        txpacket[PKT_ID] = scs_id
+        txpacket[PKT_LENGTH] = 2
+        txpacket[PKT_INSTRUCTION] = INST_RECOVER
+
+        rxpacket, result, error = self.txRxPacket(txpacket)
+
+        return result, error
