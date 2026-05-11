@@ -37,7 +37,7 @@ else:
     print("Failed to change the baudrate")
     quit()
 
-# TTLSD当前位置校准为1024
+# current position of TTLSD is calibrated at 1024
 scs_comm_result, scs_error = packetHandler.reOfsCal(1, 1024)
 if scs_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(scs_comm_result))

@@ -18,8 +18,7 @@ from lydevs_sdk import *                   # Uses lydevs_sdk library
 # Initialize PortHandler instance
 # Set the port path
 # Get methods and members of PortHandlerLinux or PortHandlerWindows
-#portHandler = PortHandler('/dev/ttyUSB0') #ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
-portHandler = PortHandler('COM6') #ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
+portHandler = PortHandler('/dev/ttyUSB0') #ex) Windows: "COM1"   Linux: "/dev/ttyUSB0" Mac: "/dev/tty.usbserial-*"
 
 # Initialize PacketHandler instance
 # Get methods and members of Protocol
@@ -40,18 +39,11 @@ else:
     print("Failed to change the baudrate")
     quit()
 
-scs_comm_result, scs_error = packetHandler.SetMode(1, 1)
+# id1 Set mode 1
+scs_comm_result, scs_error = packetHandler.WheelMode(1)
 if scs_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(scs_comm_result))
 elif scs_error != 0:
-    print("%s" % packetHandler.getRxPacketError(scs_error))
-
-scs_mode, scs_comm_result, scs_error = packetHandler.GetMode(1)
-if scs_comm_result != COMM_SUCCESS:
-    print(packetHandler.getTxRxResult(scs_comm_result))
-else:
-    print("Mode:%d" % scs_mode)
-if scs_error != 0:
     print("%s" % packetHandler.getRxPacketError(scs_error))
     
 while 1:

@@ -22,6 +22,7 @@ portHandler = PortHandler('/dev/ttyUSB0') #ex) Windows: "COM1"   Linux: "/dev/tt
 # Initialize PacketHandler instance
 # Get methods and members of Protocol
 packetHandler = TTLSDClass(portHandler)
+
 # Open port
 if portHandler.openPort():
     print("Succeeded to open the port")
@@ -36,20 +37,12 @@ else:
     print("Failed to change the baudrate")
     quit()
 
-# Try to ping the ID:1 FTServo
-# Get l model number
-
-scs_comm_result, scs_error = packetHandler.SetID(254, 1)
-if scs_comm_result != COMM_SUCCESS:
-    print("%s" % packetHandler.getTxRxResult(scs_comm_result))
-elif scs_error != 0:
-    print("%s" % packetHandler.getRxPacketError(scs_error))
-
-ly_model_number, scs_comm_result, scs_error = packetHandler.ping(1)
+# TTLSD Recover Factory Settings
+scs_comm_result, scs_error = packetHandler.Recover(1)
 if scs_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(scs_comm_result))
 else:
-    print("[ID:%03d] ping Succeeded. lynode model number : %d" % (1, ly_model_number))
+    print("[ID:%03d] ofs Recover Succeeded." % (1))
 if scs_error != 0:
     print("%s" % packetHandler.getRxPacketError(scs_error))
 
