@@ -15,6 +15,7 @@ class PortHandler(object):
         self.packet_start_time = 0.0
         self.packet_timeout = 0.0
         self.tx_time_per_byte = 0.0
+        self.packet_latency_time = LATENCY_TIMER
 
         self.is_using = False
         self.port_name = port_name
@@ -64,7 +65,7 @@ class PortHandler(object):
 
     def setPacketTimeout(self, packet_length):
         self.packet_start_time = self.getCurrentTime()
-        self.packet_timeout = (self.tx_time_per_byte * packet_length) + (self.tx_time_per_byte * 3.0) + LATENCY_TIMER
+        self.packet_timeout = (self.tx_time_per_byte * packet_length) + (self.tx_time_per_byte * 3.0) + self.packet_latency_time
 
     def setPacketTimeoutMillis(self, msec):
         self.packet_start_time = self.getCurrentTime()
@@ -112,4 +113,7 @@ class PortHandler(object):
         if baudrate in [4800, 9600, 14400, 19200, 38400, 57600, 115200, 128000, 250000, 500000, 1000000]:
             return baudrate
         else:
-            return -1          
+            return -1
+
+    def setLatency(self, Latency):
+        self.packet_latency_time = Latency
