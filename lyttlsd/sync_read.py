@@ -57,7 +57,7 @@ while 1:
         if scs_data_result == True:
             # Get SCServo#scs_id present position value
             scs_present_position = groupSyncRead.getData(scs_id, LY_TTLSD_PRESENT_POSITION_L, 2)
-            scs_present_speed = groupSyncRead.getData(scs_id, LY_TTLSD_PRESENT_POSITION_L, 2)
+            scs_present_speed = groupSyncRead.getData(scs_id, LY_TTLSD_PRESENT_SPEED_L, 2)
             print("[ID:%03d] PresPos:%d PresSpd:%d" % (scs_id, scs_present_position, packetHandler.scs_tohost(scs_present_speed, 15)))
         else:
             print("[ID:%03d] groupSyncRead getdata failed" % scs_id)
